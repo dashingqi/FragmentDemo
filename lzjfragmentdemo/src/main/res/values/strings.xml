@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LzJFragmentDemo</string>
+
+    <string-array name="it_lists">
+        <item>Java</item>
+        <item>C#</item>
+        <item>Android</item>
+        <item>IOS</item>
+        <item>Python</item>
+    </string-array>
+
+</resources>

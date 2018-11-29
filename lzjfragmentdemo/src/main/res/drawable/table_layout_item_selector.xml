@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--item 按下时的背景样式-->
+    <item android:drawable="@drawable/table_layout_item_press_shape" android:state_pressed="true" />
+    <!--item 选中的背景样式-->
+    <item android:drawable="@drawable/table_layout_item_checked_shape" android:state_selected="true" />
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="#00000000" />
+        </shape>
+    </item>
+
+    <item >
+        <shape>
+            <solid android:color="#00000000"/>
+        </shape>
+    </item>
+
+
+
+</selector>
