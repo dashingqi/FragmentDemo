@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
+
 /**
  * <p>文件描述：<p>
  * <p>作者：北京车车网络技术有限公司<p>
@@ -23,11 +25,11 @@ public class SubFragment extends Fragment {
 
     private TextView tvText;
     private String text;
-    private boolean isShow = false;
     private View rootView;
     private boolean isFragmentVisible;
     private boolean isReuseView;
     private boolean isFirstVisible;
+
 
     public static SubFragment getInstance(String text){
         SubFragment subFragment = new SubFragment();
@@ -40,7 +42,7 @@ public class SubFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.d(TAG,"setUserVisibleHint = "+isVisibleToUser);
+        Logger.t(String.valueOf(Thread.currentThread())).d("setUserVisibleHint = "+isVisibleToUser);
         if (rootView==null)
             return;
         if (isFirstVisible&&isVisibleToUser){
@@ -64,13 +66,15 @@ public class SubFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG,"onCreate");
+        Logger.t(String.valueOf(Thread.currentThread())).d("onCreate");
         initVariable();
 
     }
 
     private void initVariable() {
+        //第一次显示
         isFirstVisible = true;
+        //Fragment可见了
         isFragmentVisible = false;
         rootView = null;
         isReuseView = true;
@@ -90,9 +94,13 @@ public class SubFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (rootView == null) {
             rootView = view;
+            //此时为true
             if (getUserVisibleHint()) {
+                //第一次 为 true
+                Logger.t(String.valueOf(Thread.currentThread())).i("isFirstVisible = "+isFirstVisible+" thread = "+Thread.currentThread());
                 if (isFirstVisible) {
                     onFragmentFirstVisible();
                     isFirstVisible = false;
@@ -101,15 +109,14 @@ public class SubFragment extends Fragment {
                 isFragmentVisible = true;
             }
         }
-        super.onViewCreated(view, savedInstanceState);
-        Log.d(TAG,"onViewCreated");
+        Logger.t(String.valueOf(Thread.currentThread())).d("onViewCreated");
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG,"onCreateView");
+        Logger.t(String.valueOf(Thread.currentThread())).d("onCreateView");
         View view = inflater.inflate(R.layout.fragment_sub, container, false);
         initView(view);
         return view;
@@ -118,8 +125,7 @@ public class SubFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d(TAG,"onActivityCreated");
-        Log.d(TAG,"isShow = "+isShow);
+        Logger.t(String.valueOf(Thread.currentThread())).d("onActivityCreated");
     }
 
     private void initView(View view) {
@@ -135,6 +141,8 @@ public class SubFragment extends Fragment {
      */
     protected void onFragmentFirstVisible() {
         //去获取数据
+        text = getArguments().getString("text");
+        Logger.t(String.valueOf(Thread.currentThread())).d("text = "+ text);
 
     }
 
@@ -149,6 +157,10 @@ public class SubFragment extends Fragment {
      */
     protected void onFragmentVisibleChange(boolean isVisible) {
         //设置数据
-
+        if (isVisible){
+            if(!TextUtils.isEmpty(text)){
+                tvText.setText(text);
+            }
+        }
     }
 }
