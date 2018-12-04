@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/fragmenttofragment" />
             <option value="$PROJECT_DIR$/fragmenttofragmentwithlistener" />
             <option value="$PROJECT_DIR$/lzjfragmentdemo" />
+            <option value="$PROJECT_DIR$/mytablayoutview" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
