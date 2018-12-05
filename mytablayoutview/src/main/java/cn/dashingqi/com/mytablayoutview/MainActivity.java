@@ -29,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
         mTitleList.add("标题二");
         mTitleList.add("标题三");
 
-        mFragmentList = new ArrayList<>();
-        mFragmentList.add(FragmentOne.newInstance("fragment_one","1"));
-        mFragmentList.add(FragmentOne.newInstance("fragment_two","2"));
-        mFragmentList.add(FragmentOne.newInstance("fragment_three","3"));
 
-        mTabHeard.configTabLayout(mTitleList,mFragmentList,getSupportFragmentManager(),false);
+        mFragmentList = new ArrayList<>();
+        mFragmentList.add(FragmentOne.newInstance("fragment_one", "1"));
+        mFragmentList.add(FragmentOne.newInstance("fragment_two", "2"));
+        mFragmentList.add(FragmentOne.newInstance("fragment_three", "3"));
+
+        
+        mTabHeard.configTabLayout(mTitleList, mFragmentList, getSupportFragmentManager(), false);
     }
 
     private void initView() {
